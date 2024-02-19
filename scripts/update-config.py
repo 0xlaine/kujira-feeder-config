@@ -6,7 +6,6 @@ import requests
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--tag", type=str, default="master")
     parser.add_argument("--custom", type=str, required=True)
     parser.add_argument("--config", type=str, default="global")
 
@@ -16,15 +15,10 @@ def parse_args():
 def main():
     args = parse_args()
 
-    path = f"starsquidnodes/feeder-config/{args.tag}/toml/{args.config}.toml"
-    response = requests.get(f"https://raw.githubusercontent.com/{path}")
-
-    if response.status_code != 200:
-        return
-
+    base_config = open(args.config, "r").read() + "\n"
     config = open(args.custom, "r").read() + "\n"
 
-    print(config + response.text)
+    print(config + base_config)
 
 
 if __name__ == "__main__":
