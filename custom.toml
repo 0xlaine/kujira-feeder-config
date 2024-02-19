@@ -1,0 +1,105 @@
+gas_adjustment = 2.5
+gas_prices = "0.0034ukuji"
+enable_server = true
+enable_voter = true
+provider_timeout = "1s"
+history_db = "/var/tmp/feeder.db"
+
+[server]
+listen_addr = "0.0.0.0:7171"
+read_timeout = "20s"
+verbose_cors = true
+write_timeout = "20s"
+
+[account]
+address = "kujira1p33u8q9yl65zjjhd0uevdrxjkzkyl6aykmwwd2"
+chain_id = "kaiyo-1"
+validator = "kujiravaloper1hcdv29zzskacf4jxv62gxwq9jjnxcewmuq66x6"
+prefix = "kujira"
+# Optional
+fee_granter = "kujira1vkje22mayn72r0a7kna6agv0sqm6k94ry9k6dd"
+
+[keyring]
+backend = "file"
+dir = "/home/kujioracle/.kujira"
+
+[rpc]
+grpc_endpoint = "localhost:9090"
+rpc_timeout = "100ms"
+tmrpc_endpoint = "http://10.0.0.2:30257"
+
+[telemetry]
+enable_hostname = true
+enable_hostname_label = true
+enable_service_label = true
+enabled = true
+global_labels = [["chain-id", "kaiyo-1"]]
+service_name = "price-feeder"
+type = "prometheus"
+
+# prometheus_retention = 120
+
+#
+#  URL SETS
+# ------------------------------------------------------------
+
+# providers: fin
+[url_set.fin]
+urls = [
+    "https://api.kujira.app",
+    "https://kaiyo-1.gigalixirapp.com"
+]
+
+##################
+# providers: finv2
+# https://cosmos.directory/kujira/nodes (REST)
+[url_set.api_kujira]
+urls = [
+    "https://kujira.api.kjnodes.com",
+    "https://rest-kujira.ecostake.com",
+    "https://kujira-api.lavenderfive.com:443",
+    "http://127.0.0.1:1317"
+]
+
+# providers: osmosisv2
+# https://cosmos.directory/osmosis/nodes (REST)
+[url_set.api_osmosis]
+urls = [
+    "https://osmosis-api.polkachu.com",
+    "https://osmosis.rest.stakin-nodes.com",
+    "https://osmosis-api.lavenderfive.com:443"
+]
+
+# providers: astroport_neutron
+# https://cosmos.directory/neutron/nodes (REST)
+[url_set.api_neutron]
+urls = [
+    "https://rpc-kralum.neutron-1.neutron.org",
+    "https://neutron-rpc.lavenderfive.com",
+    "https://lcd-neutron.whispernode.com"
+]
+# providers: dexter
+# https://cosmos.directory/persistence/nodes (REST)
+[url_set.api_persistence]
+urls = [
+    "https://rest-persistence.architectnodes.com",
+    "https://persistence-lcd.quantnode.tech",
+    "https://persistence-mainnet-lcd.autostake.com:443"
+]
+
+# providers: shade
+# https://cosmos.directory/secretnetwork/nodes (REST)
+[url_set.api_secret]
+urls = [
+    "https://secretnetwork-api.lavenderfive.com:443",
+    "https://1rpc.io/scrt-lcd",
+    "https://public.stakewolle.com/cosmos/secretnetwork/rest"
+]
+
+# providers: uniswapv3
+# https://ethereumnodes.com
+[url_set.rpc_ethereum]
+urls = [
+    "https://eth.llamarpc.com",
+    "https://cloudflare-eth.com/"
+]
